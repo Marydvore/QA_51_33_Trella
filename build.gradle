@@ -11,18 +11,24 @@ repositories {
 
 dependencies {
 
-    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.16.1'
-    implementation group: 'org.testng', name: 'testng', version: '7.5.1'
+    implementation("org.seleniumhq.selenium:selenium-java:4.26.0")
+    implementation("org.testng:testng:7.11.0")
 
-    compileOnly 'org.projectlombok:lombok:1.18.28'
-    annotationProcessor 'org.projectlombok:lombok:1.18.28'
+    compileOnly 'org.projectlombok:lombok:1.18.38'
+    annotationProcessor 'org.projectlombok:lombok:1.18.38'
 
-    testCompileOnly 'org.projectlombok:lombok:1.18.28'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.28'
+    testCompileOnly 'org.projectlombok:lombok:1.18.38'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.38'
 
-    implementation 'ch.qos.logback:logback-classic:1.5.18'
+    implementation 'ch.qos.logback:logback-classic:1.5.8'
 }
 
 test {
     useTestNG()
+}
+
+task smokeTests(type: Test){
+    useTestNG(){
+        suites 'src/test/resources/smokeTests.xml'
+    }
 }

@@ -10,7 +10,7 @@ import pages.LoginPage;
 import static utils.PropertiesReader.*;
 
 public class LoginTests extends AppManager {
-    @Test
+    @Test(groups = "smoke")
     public void loginPositiveTest(){
         User user = User.builder()
                 .email(gerProperty("base.properties", "email"))

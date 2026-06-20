@@ -27,6 +27,10 @@ public class BoardsPage extends BasePage{
     WebElement btnCreate;
     @FindBy(xpath = "//h2[@class='VmbXKMJLSqfD0U']")
     WebElement messageBoardDelete;
+    @FindBy(xpath = "//button[@data-testid='header-member-menu-button']")
+    WebElement btnAccount;
+    @FindBy(xpath = "//a[@data-testid='manage-account-link']")
+    WebElement btnManageAccount;
 
     public boolean validateMessageBoardDelete(String text){
         return isTextInElementPresent(messageBoardDelete, text);
@@ -52,4 +56,8 @@ public class BoardsPage extends BasePage{
     }
 
 
+    public void openMyAccount() {
+        clickWait(btnAccount);
+        clickWait(btnManageAccount);
+    }
 }

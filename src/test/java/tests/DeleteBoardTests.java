@@ -18,7 +18,7 @@ import static utils.PropertiesReader.gerProperty;
 public class DeleteBoardTests extends AppManager {
     BoardsPage boardsPage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void login() {
         User user = User.builder()
                 .email(gerProperty("base.properties", "email"))
@@ -35,7 +35,7 @@ public class DeleteBoardTests extends AppManager {
         boardsPage.clickBtnCreate();
     }
 
-    @Test
+    @Test(groups = "smoke")
     public void deletePositiveTest(){
         new MyBoardPage(getDriver()).deleteBoard();
         Assert.assertTrue(boardsPage.validateMessageBoardDelete("Board deleted."));

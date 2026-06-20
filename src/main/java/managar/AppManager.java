@@ -2,11 +2,14 @@ package managar;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.events.EventFiringDecorator;
+import org.openqa.selenium.support.events.WebDriverListener;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import utils.WDListener;
 
 import java.lang.reflect.Method;
 
@@ -18,14 +21,16 @@ public class AppManager {
         return driver;
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setUp(Method method) {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         logger.info("Start test --> " + method.getName());
+        WebDriverListener webDriverListener = new WDListener();
+        driver = new EventFiringDecorator<>(webDriverListener).decorate(driver);
     }
 
-    @AfterMethod(enabled = false)
+    @AfterMethod(alwaysRun = true)
     public void tearDown(Method method) {
         if (driver != null) {
             driver.quit();
